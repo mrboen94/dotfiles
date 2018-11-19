@@ -35,13 +35,27 @@
 ;; prevent help screen on startup
 (setq inhibit-startup-screen t)
 
+;; Custom bindings, search for keybindings to find custom binds further down
+(defvar lokemacs-leader-key "SPC"
+  "The default leader key for LokEmacs.")
+
+(defvar lokemacs-leader-secondary-key "C-SPC"
+  "The secondary leader key for LokEmacs.")
+
+(defvar lokemacs-major-leader-key ","
+  "The default major mode leader key for LokEmacs.")
+
+(defvar lokemacs-major-leader-secondary-key "M-,"
+  "The secondary major mode leader key for LokEmacs.")
+
 ;; Hopefully sends tasks to OmniFocus via omni-capture.el
 ;; (autoload 'send-region-to-omnifocus "omnifocus-capture.el" "Send region to OmniFocus" t)
 ;; (global-set-key "\C-c\C-o" 'send-region-to-omnifocus)
 
 ;; Mac settings for  command and right alt.
-(setq mac-right-command-modifier 'meta
-      mac-right-option-modifier 'none)
+(when (eq system-type 'darwin)
+	  (setq mac-right-command-modifier 'meta
+		mac-right-option-modifier 'none))
 
 ;; Lets remove som clutter
 (global-visual-line-mode 1)
@@ -65,17 +79,10 @@
 
 ;; Use evil mode (vim)
 (use-package evil
-  :config
-  (evil-mode 1))
-
-(use-package evil
   :ensure t
   :demand t
   :config
-  (define-key evil-normal-state-map (kbd "C-H") 'evil-window-left)
-  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right))
+  (evil-mode 1))
 
 (use-package smex)
 
@@ -86,12 +93,6 @@
 
 ;; Say no to the updog boys (^)
 (setq ivy-initial-inputs-alist nil)
-
-;;(use-package counsel
-;;  :bind (("M-x" - councel-M-x)))
-
-;;(use-package swiper
-;;  :bind (("M-s" . counsel-grep-or-swiper)))
 
 (use-package ivy-hydra)
 
@@ -159,6 +160,61 @@
   :config
   (setq rainbow-x-colors nil)
   (add-hook 'prog-mode-hook 'rainbow-mode))
+
+(use-package general
+  :demand t
+  :commands (general-define-key general-override-mode general-evil-setup general--simulate-keys)
+  :config
+  (progn
+    (setq general-override-states '(insert emacs hybrid normal visual motion operator replace))
+    (general-override-mode)
+    (general-evil-setup)
+    (general-create-definer lokemacs-leader
+			    :states '(normal insert emacs)
+			    :prefix lokemacs-leader-key
+			    :non-normal-prefix lokemacs-leader-secondary-key)
+    (general-create-definer lokemacs-major-leader
+			    :states '(normal insert emacs)
+			    :prefix lokemacs-major-leader-key
+			    :non-normal-prefix lokemacs-major-leader-secondary-key)
+    (general-nmap "SPC m" (general-simulate-key "," :which-key "major mode"))))
+
+;; Keybindings and counsel
+(use-package counsel
+  :commands (counsel-mode)
+  :demand t
+  :delight
+  :general
+  (:keymaps 'ivy-mode-map
+	    [remap find-file]                'counsel-find-file
+            [remap recentf]                  'counsel-recentf
+            [remap imenu]                    'counsel-imenu
+            [remap bookmark-jump]            'counsel-bookmark
+            [remap execute-extended-command] 'counsel-M-x
+            [remap describe-function]        'counsel-describe-function
+            [remap describe-variable]        'counsel-describe-variable
+            [remap describe-face]            'counsel-describe-face
+	    [remap eshell-list-history]      'counsel-esh-history))
+
+  (lokemacs-leader
+  "SPC" '(counsel-M-x :wk "M-x")
+  "a" '(:ignore t :wk "applications")
+  "b" '(:ignore t :wk "buffers")
+  "f e d" '(find-config :wk "Open init file")
+  "f s" '(save-buffer :wk "Save/write")
+  "g" '(:ignore t :wk "git")
+  "h" '(:ignore t :wk "help")
+  "w" '(:ignore t :wk "windows")
+  "w o" '(delete-other-windows :wk "Delete other window")
+  "w h" '(evil-window-left :wk "Left window")
+  "w j" '(evil-window-down :wk "Window down")
+  "w k" '(evil-window-up :wk "Window up")
+  "w l" '(evil-window-right :wk "Window right")
+  "q r" '(restart-emacs :wk "Restart emacs")
+  "t" '(neotree-toggle :wk "Toggle tree"))
+
+(use-package swiper
+  :bind (("M-s" . counsel-grep-or-swiper)))
 
 ;; Help me not dent my head while programming
 (use-package aggressive-indent)
@@ -317,16 +373,15 @@
              ("a" . sx-ask)
              ("s" . sx-search)))
 
-;; Fullscreen on startup
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; Size of LokEmacs at startup
+(add-to-list 'default-frame-alist '(width . 90))
+(add-to-list 'default-frame-alist '(height . 80))
 
 ;; Shortcut to init file
 (defun find-config()
   "Edit config.org"
   (interactive)
   (find-file "~/.emacs.d/init.el"))
-
-(global-set-key (kbd "C-c I") 'find-config)
 
 ;; Switch buffers function
 (defun my--switch-buffer (&optional window)
@@ -350,7 +405,18 @@
   :config
 ;; Restart emacs with current buffers (PS: BETA)
 ;; (Setq restart-emacs-restore-frames t)
-(global-set-key "\C-c\C-q" 'restart-emacs))
+  (global-set-key "\C-c\C-q" 'restart-emacs))
+
+;; Custom set functions
+(defun other-window-kill-buffer ()
+  "Kill the buffer in the other window"
+  (interactive)
+  (let ((win-curr (selected-window))
+	(win-other (next-window)))
+    (select-window win-other)
+    (kill-this-buffer)
+    (select-window win-curr)))
+
 
 ;;(Custom-set-faces)
  ;; custom-set-faces was added by Custom.
