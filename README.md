@@ -7,8 +7,9 @@ Currently only has one dotfile and is focusing on elegant simplicity, while stil
 I am trying to aim for only one dotfile for simple installation on many different machines, will need to make exceptions for different Operating systems and other stuff. But as of now I am focusing on making it work on my own machine first. (Put on your own oxygen mask first and all that).
 
 ### The way forward
-- [x] Make space the leader key
+- [x] ~~Make space the leader key~~
 - [ ] Make ox-twbs work with org export
-- [x] Make better keybinds for evil windows
+- [x] ~~Make better keybinds for evil windows~~
 - [ ] Comment more of my dotfile to make it understandable
-- [ ] Create a WhatDoesMyPackagesDo.org file
+- [x] ~~Create a WhatDoesMyPackagesDo.org file~~
+- [ ] Make the WhatDoesMyPackagesDo.org file more complete
