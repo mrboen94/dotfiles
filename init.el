@@ -1,9 +1,16 @@
+;;; init.el --- init file of this emacs dotfile, named LokEmacs for fun
+;; Author: Mathias Bøe
+;; Created: September 2018
+;; Keywords: LokEmacs, emacs, dotfile, mathias, boe, bøe, dotfiles
+;; URL: www.github.com/mrboen94/dotfiles
+;;; Code:
+
 ;; This is an alist that helps emacs starting up faster, makes conifguration of packages very modular.
 (setq package-archives
   '(("gnu" . "https://elpa.gnu.org/packages/")
     ("melpa" . "https://melpa.org/packages/")
     ("org" . "https://orgmode.org/elpa/")))
-
+;; Prefer newer packages and load them
 (setq-default load-prefer-newer t
 	      use-package-always-ensure t
 	      package-enable-at-startup nil)
@@ -14,12 +21,9 @@
 ;; Makes sure the use-package are ready when you start emacs
 (eval-when-compile
   (require 'use-package))
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
 (package-initialize)
 
+;; Increase memory emacs is allowed to use, boosts the startup time slightly.
 (setq gc-cons-threshold 10000000)
 
 ;; Restore after startup
@@ -50,11 +54,17 @@
 	  (setq mac-right-command-modifier 'meta
 		mac-right-option-modifier 'none))
 
-;; Lets remove som clutter
+;; Lets remove som clutter and customize some visual stuff
 (global-visual-line-mode 1)
 (tool-bar-mode -1)
-
+(add-hook 'before-save-hook 'delete-trailing-whitespace) ; Delete whitespace at end of lines
+(set-frame-font "Iosevka" nil t)                         ; Change the font
 (setq ring-bell-function 'ignore)
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)) ; Imporve look and feel
+(add-to-list 'default-frame-alist '(ns-appearance . dark))        ; Imporve look and feel
+(global-hl-line-mode 1)
+(add-to-list 'default-frame-alist '(width . 90))         ; Size of LokEmacs at startup
+(add-to-list 'default-frame-alist '(height . 80))        ; Size of LokEmacs at startup
 
 ;; Makes yes or no functions shorter.
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -67,8 +77,6 @@
       kept-old-versions 5    ; and how many of the old
       )
 
-;; Delete whitespace at end of lines
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Use evil mode (vim)
 (use-package evil
@@ -116,13 +124,6 @@
 (setq neo-smart-open t)
 (setq neo-theme 'arrow)
 
-;; (use-package treemacs)
-
-;;(use-package panda-theme
-;;  :config
-;;  (load-theme 'panda t))
-
-(set-frame-font "Iosevka" nil t) ;;Iosevka 12
 
 (use-package feebleline
   :config
@@ -132,12 +133,6 @@
 
 ;; Removes syntax highlighting for everything except the line the cursor is on
 (use-package focus)
-
-(global-hl-line-mode 1)
-
-;; Imporve look and feel
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 ;; parents of all colors
 (use-package smartparens
@@ -193,6 +188,7 @@
   "SPC" '(counsel-M-x :wk "M-x")
   "a" '(:ignore t :wk "applications")
   "b" '(:ignore t :wk "buffers")
+  "f" '(:ignore f :wk "Files")
   "f e d" '(find-config :wk "Open init file")
   "f s" '(save-buffer :wk "Save/write")
   "f f" '(find-file :wl "find file")
@@ -204,8 +200,18 @@
   "w j" '(evil-window-down :wk "Window down")
   "w k" '(evil-window-up :wk "Window up")
   "w l" '(evil-window-right :wk "Window right")
+  "w s j" '(split-window-below :wk "Split down")
+  "w s k" '(split-window-above :wk "Split above")
+  "w s h" '(split-window-horizontally :wk "Split horizontally")
+  "w s v" '(split-window-vertically :wk "Split vertically")
+  "w d" '(delete-window :wk "Delete current window")
+  "w m" '(maximize-window :wk "Maximize current window")
+  "w b" '(balance-windows :wk "Balance windows")
   "q r" '(restart-emacs :wk "Restart emacs")
-  "t" '(neotree-toggle :wk "Toggle tree"))
+  "t" '(:ignore t :wk "Toggles")
+  "t t" '(neotree-toggle :wk "Toggle tree")
+  "t w" '(writegood-mode :wk "Toggle Write good")
+  "t o" '(org-mode :wk "Toggle org mode"))
 
 (use-package swiper
   :bind (("M-s" . counsel-grep-or-swiper)))
@@ -354,7 +360,7 @@
   :config
   (add-to-list 'writegood-weasel-words "actionable"))
 
-;; Stack overflow
+;; Stack overflow (will be deleted at some point, its never used)
 (use-package sx
   :config
   (bind-keys :prefix "C-c s"
@@ -367,18 +373,14 @@
              ("a" . sx-ask)
              ("s" . sx-search)))
 
-;; Size of LokEmacs at startup
-(add-to-list 'default-frame-alist '(width . 90))
-(add-to-list 'default-frame-alist '(height . 80))
 
-;; Shortcut to init file
-(defun find-config()
+;;; Custom functions
+(defun find-config()                         ; Shortcut to init file--------
   "Edit config.org"
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
-;; Switch buffers function
-(defun my--switch-buffer (&optional window)
+(defun my--switch-buffer (&optional window)  ; Switch buffers function-------
   (interactive)
   (let ((current-buffer (window-buffer window))
         (buffer-predicate
@@ -400,16 +402,6 @@
 ;; Restart emacs with current buffers (PS: BETA)
 ;; (Setq restart-emacs-restore-frames t)
   (global-set-key "\C-c\C-q" 'restart-emacs))
-
-;; Custom set functions
-(defun other-window-kill-buffer ()
-  "Kill the buffer in the other window"
-  (interactive)
-  (let ((win-curr (selected-window))
-	(win-other (next-window)))
-    (select-window win-other)
-    (kill-this-buffer)
-    (select-window win-curr)))
 
 
 ;;(Custom-set-faces)
@@ -449,3 +441,4 @@
  '(org-level-6 ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande"))))
  '(org-level-7 ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande"))))
  '(org-level-8 ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande")))))
+;;; filename ends here
