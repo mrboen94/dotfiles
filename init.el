@@ -202,6 +202,7 @@
   "b" '(:ignore t :wk "buffers")
   "f e d" '(find-config :wk "Open init file")
   "f s" '(save-buffer :wk "Save/write")
+  "f f" '(find-file :wl "find file")
   "g" '(:ignore t :wk "git")
   "h" '(:ignore t :wk "help")
   "w" '(:ignore t :wk "windows")
