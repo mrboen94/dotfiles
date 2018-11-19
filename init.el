@@ -70,6 +70,11 @@
 		display-line-numbers-current-absolute t
 		display-line-numbers-width 4
 		display-line-numbers-widen nil))
+(setq initial-scratch-message ";;     +-+-+-+-+-+-+-+-+
+;;     |L|o|k|E|m|a|c|s|
+;;     +-+-+-+-+-+-+-+-+
+;; Press \"SPC f f\" to start!
+")
 
 ;; Makes yes or no functions shorter.
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -191,8 +196,13 @@
 
   (lokemacs-leader
   "SPC" '(counsel-M-x :wk "M-x")
+  "<tab>" '(evil-next-buffer :wk "Next buffer")
+  "<backtab>" '(evil-prev-buffer :wk "Prev buffer")
   "a" '(:ignore t :wk "applications")
   "b" '(:ignore t :wk "buffers")
+  "b b" '(split-to-buffer :wk "New window buffer")
+  "b s" '(switch-to-buffer :wk "Switch buffer")
+  "b k" '(kill-buffer :wk "Kill buffer")
   "f" '(:ignore f :wk "Files")
   "f e d" '(find-config :wk "Open init file")
   "f s" '(save-buffer :wk "Save/write")
@@ -207,11 +217,13 @@
   "w l" '(evil-window-right :wk "Window right")
   "w s j" '(split-window-below :wk "Split down")
   "w s k" '(split-window-above :wk "Split above")
-  "w s h" '(split-window-horizontally :wk "Split horizontally")
-  "w s v" '(split-window-vertically :wk "Split vertically")
+  "w s v" '(split-window-horizontally :wk "Split vertically")
+  "w s h" '(split-window-vertically :wk "Split horizontally")
   "w d" '(delete-window :wk "Delete current window")
   "w m" '(maximize-window :wk "Maximize current window")
   "w b" '(balance-windows :wk "Balance windows")
+  "q" '(:ignore t :wk "quit/restart")
+  "q q" '(evil-quit :wk "quit")
   "q r" '(restart-emacs :wk "Restart emacs")
   "t" '(:ignore t :wk "Toggles")
   "t t" '(neotree-toggle :wk "Toggle tree")
@@ -275,6 +287,16 @@
   (use-package godoctor)
 
   (use-package go-guru))
+
+(defun split-to-buffer ()
+  (interactive)
+  (let (($buf (generate-new-buffer "untitled")))
+    (split-window-below)
+    (other-window 1)
+    (switch-to-buffer $buf)
+    (initial-major-mode)
+    $buf
+    ))
 
 (defun jc/go-guru-set-current-package-as-main ()
   "GoGuru requires the scope to be set to a go package which
@@ -437,14 +459,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Iosevka" :foundry "nil" :slant normal :weight normal :height 120 :width normal))))
- '(org-document-title ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande" :height 1.33 :underline nil))))
- '(org-level-1 ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande" :height 1.33))))
- '(org-level-2 ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande" :height 1.33))))
- '(org-level-3 ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande" :height 1.33))))
- '(org-level-4 ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande"))))
- '(org-level-5 ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande"))))
- '(org-level-6 ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande"))))
- '(org-level-7 ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande"))))
- '(org-level-8 ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande")))))
+ '(org-document-title ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande" :height 1.33 :underline nil))))
+ '(org-level-1 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande" :height 1.33))))
+ '(org-level-2 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande" :height 1.33))))
+ '(org-level-3 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande" :height 1.33))))
+ '(org-level-4 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande"))))
+ '(org-level-5 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande"))))
+ '(org-level-6 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande"))))
+ '(org-level-7 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande"))))
+ '(org-level-8 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande")))))
 ;;; filename ends here
