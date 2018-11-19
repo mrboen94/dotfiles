@@ -63,8 +63,13 @@
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)) ; Imporve look and feel
 (add-to-list 'default-frame-alist '(ns-appearance . dark))        ; Imporve look and feel
 (global-hl-line-mode 1)
-(add-to-list 'default-frame-alist '(width . 90))         ; Size of LokEmacs at startup
+(add-to-list 'default-frame-alist '(width . 110))         ; Size of LokEmacs at startup
 (add-to-list 'default-frame-alist '(height . 80))        ; Size of LokEmacs at startup
+(when (version<= "26.0.50" emacs-version )
+  (setq-default display-line-numbers 'visual
+		display-line-numbers-current-absolute t
+		display-line-numbers-width 4
+		display-line-numbers-widen nil))
 
 ;; Makes yes or no functions shorter.
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -211,7 +216,8 @@
   "t" '(:ignore t :wk "Toggles")
   "t t" '(neotree-toggle :wk "Toggle tree")
   "t w" '(writegood-mode :wk "Toggle Write good")
-  "t o" '(org-mode :wk "Toggle org mode"))
+  "t o" '(org-mode :wk "Toggle org mode")
+  "t l" '(display-line-numbers-mode :wk "Toggle line numbers"))
 
 (use-package swiper
   :bind (("M-s" . counsel-grep-or-swiper)))
@@ -399,9 +405,9 @@
 
 (use-package restart-emacs
   :config
-;; Restart emacs with current buffers (PS: BETA)
-;; (Setq restart-emacs-restore-frames t)
-  (global-set-key "\C-c\C-q" 'restart-emacs))
+  ;; Restart emacs with current buffers (PS: BETA)
+  (setq restart-emacs-restore-frames 't))
+;;  (global-set-key "\C-c\C-q" 'restart-emacs))
 
 
 ;;(Custom-set-faces)
