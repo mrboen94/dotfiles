@@ -5,9 +5,6 @@
     ("org" . "https://orgmode.org/elpa/")))
 
 (setq-default load-prefer-newer t
-	      package-enable-at-startup nil)
-
-(setq-default load-prefer-newer t
 	      use-package-always-ensure t
 	      package-enable-at-startup nil)
 
@@ -47,10 +44,6 @@
 
 (defvar lokemacs-major-leader-secondary-key "M-,"
   "The secondary major mode leader key for LokEmacs.")
-
-;; Hopefully sends tasks to OmniFocus via omni-capture.el
-;; (autoload 'send-region-to-omnifocus "omnifocus-capture.el" "Send region to OmniFocus" t)
-;; (global-set-key "\C-c\C-o" 'send-region-to-omnifocus)
 
 ;; Mac settings for  command and right alt.
 (when (eq system-type 'darwin)
@@ -125,9 +118,9 @@
 
 ;; (use-package treemacs)
 
-(use-package panda-theme
-  :config
-  (load-theme 'panda t))
+;;(use-package panda-theme
+;;  :config
+;;  (load-theme 'panda t))
 
 (set-frame-font "Iosevka" nil t) ;;Iosevka 12
 
