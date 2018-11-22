@@ -128,6 +128,8 @@
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
+(use-package panda-theme)
+
 (use-package neotree
   :config
   (global-set-key (kbd "C-c t") 'neotree-toggle))
@@ -248,8 +250,8 @@
 (use-package fzf)
 
 (use-package exec-path-from-shell
-  :config
-  (exec-path-from-shell-initialize))
+  :ensure t
+  :init (exec-path-from-shell-initialize))
 
 (use-package magit
   :bind ("C-x g" . magit-status))
@@ -450,7 +452,7 @@
  '(custom-enabled-themes (quote (dracula)))
  '(custom-safe-themes
    (quote
-    ("aaffceb9b0f539b6ad6becb8e96a04f2140c8faa1de8039a343a4f1e009174fb" default)))
+    ("3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "aaffceb9b0f539b6ad6becb8e96a04f2140c8faa1de8039a343a4f1e009174fb" default)))
  '(package-selected-packages
    (quote
     (htmlize ivy use-package evil-leader org-agenda-property restart-emacs which-key helm doom-themes dracula-theme evil org))))
@@ -459,13 +461,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-document-title ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande" :height 1.33 :underline nil))))
- '(org-level-1 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande" :height 1.33))))
- '(org-level-2 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande" :height 1.33))))
- '(org-level-3 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande" :height 1.33))))
- '(org-level-4 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande"))))
- '(org-level-5 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande"))))
- '(org-level-6 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande"))))
- '(org-level-7 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande"))))
- '(org-level-8 ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande")))))
+ '(org-document-title ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande" :height 1.33 :underline nil))))
+ '(org-level-1 ((t (:inherit default :background "#1d1f20" :foreground "#A83434" :slant normal :weight normal :height 1.33 :width normal :foundry "nil" :family "Lucida Grande"))))
+ '(org-level-2 ((t (:inherit default :foreground "#D43C47" :slant normal :weight normal :height 1.33 :width normal :foundry "nil" :family "Lucida Grande"))))
+ '(org-level-3 ((t (:inherit default :foreground "#EF553C" :slant normal :weight normal :height 1.33 :width normal :foundry "nil" :family "Lucida Grande"))))
+ '(org-level-4 ((t (:inherit default :foreground "#F37717" :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Lucida Grande"))))
+ '(org-level-5 ((t (:inherit default :foreground "#F68E00" :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Lucida Grande"))))
+ '(org-level-6 ((t (:inherit default :foreground "#FBAF00" :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Lucida Grande"))))
+ '(org-level-7 ((t (:inherit default :foreground "#F4D128" :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Lucida Grande"))))
+ '(org-level-8 ((t (:inherit default :foreground "#F1D700" :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Lucida Grande")))))
 ;;; filename ends here
