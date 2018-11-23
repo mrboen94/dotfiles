@@ -128,8 +128,6 @@
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
-(use-package panda-theme)
-
 (use-package neotree
   :config
   (global-set-key (kbd "C-c t") 'neotree-toggle))
@@ -231,7 +229,9 @@
   "t t" '(neotree-toggle :wk "Toggle tree")
   "t w" '(writegood-mode :wk "Toggle Write good")
   "t o" '(org-mode :wk "Toggle org mode")
-  "t l" '(display-line-numbers-mode :wk "Toggle line numbers"))
+  "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
+  "t p" '(org-toggle-pretty-entities :wk "Toggle pretty entities")
+  "t i" '(org-toggle-inline-images :wk "Toggle inline images"))
 
 (use-package swiper
   :bind (("M-s" . counsel-grep-or-swiper)))
