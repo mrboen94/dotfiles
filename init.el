@@ -371,14 +371,14 @@
      (headline           `(:inherit default :weight normal :foreground ,base-font-color)))
 
   (custom-theme-set-faces 'user
-                          `(org-level-8 ((t (,@headline ,@variable-tuple))))
-                          `(org-level-7 ((t (,@headline ,@variable-tuple))))
-                          `(org-level-6 ((t (,@headline ,@variable-tuple))))
-                          `(org-level-5 ((t (,@headline ,@variable-tuple))))
-                          `(org-level-4 ((t (,@headline ,@variable-tuple))))
-                          `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.33))))
-                          `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.33))))
-                          `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.33 ))))
+                          `(org-level-8 ((t (:foreground "#F1D700"))))
+                          `(org-level-7 ((t (:foreground "#F4D128"))))
+                          `(org-level-6 ((t (:foreground "#FBAF00"))))
+                          `(org-level-5 ((t (:foreground "#F68E00"))))
+                          `(org-level-4 ((t (:foreground "#F37717"))))
+                          `(org-level-3 ((t (:foreground "#EF553C" :height 1.33))))
+                          `(org-level-2 ((t (:foreground "#D43C47" :height 1.33))))
+                          `(org-level-1 ((t (:foreground "#A83434" :height 1.33 ))))
                           `(org-document-title ((t (,@headline ,@variable-tuple :height 1.33 :underline nil))))))
 
 ;; Make html nice again
@@ -461,13 +461,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-document-title ((t (:inherit default :weight normal :foreground "#E6E6E6" :font "Lucida Grande" :height 1.33 :underline nil))))
- '(org-level-1 ((t (:inherit default :background "#1d1f20" :foreground "#A83434" :slant normal :weight normal :height 1.33 :width normal :foundry "nil" :family "Lucida Grande"))))
- '(org-level-2 ((t (:inherit default :foreground "#D43C47" :slant normal :weight normal :height 1.33 :width normal :foundry "nil" :family "Lucida Grande"))))
- '(org-level-3 ((t (:inherit default :foreground "#EF553C" :slant normal :weight normal :height 1.33 :width normal :foundry "nil" :family "Lucida Grande"))))
- '(org-level-4 ((t (:inherit default :foreground "#F37717" :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Lucida Grande"))))
- '(org-level-5 ((t (:inherit default :foreground "#F68E00" :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Lucida Grande"))))
- '(org-level-6 ((t (:inherit default :foreground "#FBAF00" :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Lucida Grande"))))
- '(org-level-7 ((t (:inherit default :foreground "#F4D128" :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Lucida Grande"))))
- '(org-level-8 ((t (:inherit default :foreground "#F1D700" :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Lucida Grande")))))
+ '(org-document-title ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande" :height 1.33 :underline nil))))
+ '(org-level-1 ((t (:foreground "#A83434" :height 1.33))))
+ '(org-level-2 ((t (:foreground "#D43C47" :height 1.33))))
+ '(org-level-3 ((t (:foreground "#EF553C" :height 1.33))))
+ '(org-level-4 ((t (:foreground "#F37717"))))
+ '(org-level-5 ((t (:foreground "#F68E00"))))
+ '(org-level-6 ((t (:foreground "#FBAF00"))))
+ '(org-level-7 ((t (:foreground "#F4D128"))))
+ '(org-level-8 ((t (:foreground "#F1D700")))))
 ;;; filename ends here
