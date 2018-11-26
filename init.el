@@ -29,6 +29,9 @@
 
 ;; Initialize package settings
 (package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package t))
 
 ;; Makes sure the use-package are ready when you start emacs
 (eval-when-compile
@@ -390,6 +393,10 @@
                           `(org-level-1 ((t (:foreground "#A83434" :height 1.33 ))))
                           `(org-document-title ((t (,@headline ,@variable-tuple :height 1.33 :underline nil))))))
 
+(use-package doom-themes
+  :init
+  (load-theme 'doom-molokai t))
+
 ;; Make html nice again
 (use-package ox-twbs)
 
@@ -450,25 +457,10 @@
   (setq gc-cons-threshold 16777216
         gc-cons-percentage 0.1))
 
+
 ;;(Custom-set-faces)
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
 ;;  (default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "nil" :family "iosevka"))))
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
- '(custom-enabled-themes (quote (dracula)))
- '(custom-safe-themes
-   (quote
-    ("3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "aaffceb9b0f539b6ad6becb8e96a04f2140c8faa1de8039a343a4f1e009174fb" default)))
- '(package-selected-packages
-   (quote
-    (htmlize ivy use-package evil-leader org-agenda-property restart-emacs which-key helm doom-themes dracula-theme evil org))))
