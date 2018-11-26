@@ -17,6 +17,7 @@ I am trying to aim for only one dotfile for simple installation on many differen
 
 *** Current list of custom shortcuts
 | Keybinding  | What it does                                                     |
+|-------------+------------------------------------------------------------------|
 | SPC SPC     | M-x                                                              |
 | SPC tab     | Switch window buffer to next buffer (cycle through)              |
 | SPC backtab | Other direction                                                  |
@@ -50,8 +51,8 @@ I am trying to aim for only one dotfile for simple installation on many differen
 
 *** Keywords in initfile
 Here is a list of keywords to search for if you want to search through the init.el file to find specific things. To search type "/" and type the word. If more than one option shows up you can cycle through them by pressing "n" after escaping the search with RET (return/enter).
-| keyword          | What you'll find                                                                                                                           |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Keyword          | What you'll find                                                                                                                           |
+|------------------+--------------------------------------------------------------------------------------------------------------------------------------------|
 | keybindings      | This will show you the list of the current keybindings and also give you an idea of how the syntax works if you want to edit them yourself |
 | custom bindings  | This will get you to where you can chose the leader key. You might want to change the bindings as well though                              |
 | mac settings     | This is what disables the right alt (META) key if you are on mac. This is useful for nordic layout keyboards                               |
