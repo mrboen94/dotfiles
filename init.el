@@ -464,3 +464,25 @@
  ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
 ;;  (default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "nil" :family "iosevka"))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (restart-emacs sx writegood-mode ox-twbs doom-themes org-bullets omnisharp csharp-mode flycheck-irony company-irony irony anaconda-mode company-ghc ghc hindent haskell-mode go-guru godoctor go-eldoc go-mode markdown-mode web-mode git-timemachine git-gutter magit exec-path-from-shell fzf smart-dash aggressive-indent counsel general rainbow-mode rainbow-delimiters smartparens focus emojify feebleline neotree expand-region ace-window avy which-key ivy-hydra ivy smex evil use-package))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-document-title ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande" :height 1.33 :underline nil))))
+ '(org-level-1 ((t (:foreground "#A83434" :height 1.33))))
+ '(org-level-2 ((t (:foreground "#D43C47" :height 1.33))))
+ '(org-level-3 ((t (:foreground "#EF553C" :height 1.33))))
+ '(org-level-4 ((t (:foreground "#F37717"))))
+ '(org-level-5 ((t (:foreground "#F68E00"))))
+ '(org-level-6 ((t (:foreground "#FBAF00"))))
+ '(org-level-7 ((t (:foreground "#F4D128"))))
+ '(org-level-8 ((t (:foreground "#F1D700")))))
