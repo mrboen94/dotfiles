@@ -45,7 +45,7 @@
 ;; prevent help screen on startup
 (setq inhibit-startup-screen t)
 
-;; Custom bindings, search for keybindings to find custom binds further down
+;; Custom bindings
 (defvar lokemacs-leader-key "SPC"
   "The default leader key for LokEmacs.")
 
@@ -58,7 +58,7 @@
 (defvar lokemacs-major-leader-secondary-key "M-,"
   "The secondary major mode leader key for LokEmacs.")
 
-;; Mac settings for  command and right alt.
+;; mac settings for  command and right alt.
 (when (eq system-type 'darwin)
 	  (setq mac-right-command-modifier 'meta
 		mac-right-option-modifier 'none))
@@ -150,7 +150,7 @@
 
 (use-package emojify)
 
-;; Removes syntax highlighting for everything except the line the cursor is on
+;; remove syntax highlighting for everything except the line the cursor is on
 (use-package focus)
 
 ;; parents of all colors
@@ -186,7 +186,7 @@
 			    :non-normal-prefix lokemacs-major-leader-secondary-key)
     (general-nmap "SPC m" (general-simulate-key "," :which-key "major mode"))))
 
-;; Keybindings and counsel
+;; keybindings and counsel
 (use-package counsel
   :commands (counsel-mode)
   :demand t
@@ -319,7 +319,7 @@
          (relative-package-path (directory-file-name (file-name-directory (file-relative-name filename gopath-src-path)))))
     (setq go-guru-scope relative-package-path)))
 
-;; Haskell
+;; haskell
 (use-package haskell-mode)
 (use-package hindent)
 (use-package ghc
@@ -330,7 +330,7 @@
   :config
   (add-to-list 'company-backends 'company-ghc))
 
-;; Python
+;; python
 (use-package anaconda-mode
   :config
   (add-hook 'python-mode-hook 'anaconda-mode)
@@ -353,7 +353,7 @@
   :config
   (add-to-list 'company-backends 'company-omnisharp))
 
-;; Org
+;; org
 (setq org-startup-indented 'f)
 (setq org-directory "~/org")
 (setq org-special-ctrl-a/e 't)
@@ -368,7 +368,7 @@
   :config
   (setq org-bullets-bullet-list '("∙"))
   (add-hook 'org-mode-hook 'org-bullets-mode))
-;; Org customization
+
 (let*
     ((variable-tuple (cond
                       ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
@@ -413,7 +413,7 @@
              ("s" . sx-search)))
 
 
-;;; Custom functions
+;;; custom functions
 (defun find-config()                         ; Shortcut to init file--------
   "Edit config.org"
   (interactive)
