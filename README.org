@@ -1,0 +1,72 @@
+* dotfiles
+
+Note, you will need the Iosevka font for this version to work correctly. You can ofcourse change this yourself in the init file if you prefer another font.
+
+** LokEmacs
+WIP and current working title.
+Currently only has one dotfile and is focusing on elegant simplicity, while still powerful enough to do what needs to be done.
+I am trying to aim for only one dotfile for simple installation on many different machines, will need to make exceptions for different Operating systems and other stuff. But as of now I am focusing on making it work on my own machine first. (Put on your own oxygen mask first and all that).
+
+*** The way forward
+- [x] ~~Make space the leader key~~
+- [ ] Make ox-twbs work with org export
+- [x] ~~Make better keybinds for evil windows~~
+- [ ] Comment more of my dotfile to make it understandable
+- [x] ~~Create a WhatDoesMyPackagesDo.org file~~
+- [ ] Make the WhatDoesMyPackagesDo.org file more complete
+
+*** Current list of custom shortcuts
+| Keybinding  | What it does                                                     |
+| SPC SPC     | M-x                                                              |
+| SPC tab     | Switch window buffer to next buffer (cycle through)              |
+| SPC backtab | Other direction                                                  |
+| SPC b       | Buffer shortcuts                                                 |
+| SPC b b     | Split window horizontally and open buffer in new window          |
+| SPC b s     | Switch buffer                                                    |
+| SPC b k     | Kill current buffer                                              |
+| SPC f e d   | Find config file (init.el)                                       |
+| SPC f s     | Save / write                                                     |
+| SPC f f     | Find file (can also be used to create a file)                    |
+| SPC w o     | Delete other windows (does not kill buffers)                     |
+| SPC w h     | Switch to left window                                            |
+| SPC w j     | Switch to window below                                           |
+| SPC w k     | Switch to window above                                           |
+| SPC w l     | Switch to right window                                           |
+| SPC w s j   | Split window above                                               |
+| SPC w s k   | Split window below                                               |
+| SPC w s v   | Split window vertically                                          |
+| SPC w s h   | Split window horizontally                                        |
+| SPC w d     | Delete window (does not kill the buffer)                         |
+| SPC w m     | Maximizes current window                                         |
+| SPC w b     | Balance current windows                                          |
+| SPC q q     | Quit emacs                                                       |
+| SPC q r     | Restart and open current buffers                                 |
+| SPC t t     | Toggle tree view                                                 |
+| SPC t w     | Toggle writegood mode                                            |
+| SPC t o     | Toggle org-mode                                                  |
+| SPC t l     | Toggle line numbers (may or may not work at the moment)          |
+| SPC t p     | Toggle hiding \*bold\* the stars in *bold* etc (pretty enteties) |
+| SPC t i     | Toggle inline images (in org-mode)                               |
+
+*** Keywords in initfile
+Here is a list of keywords to search for if you want to search through the init.el file to find specific things. To search type "/" and type the word. If more than one option shows up you can cycle through them by pressing "n" after escaping the search with RET (return/enter).
+| keyword          | What you'll find                                                                                                                           |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| keybindings      | This will show you the list of the current keybindings and also give you an idea of how the syntax works if you want to edit them yourself |
+| custom bindings  | This will get you to where you can chose the leader key. You might want to change the bindings as well though                              |
+| mac settings     | This is what disables the right alt (META) key if you are on mac. This is useful for nordic layout keyboards                               |
+| visual stuff     | This will get you a list of customizations for emacs, including font settings if you don't have Iosevka installed                          |
+| evil mode        | Enable/disable evil (vim) mode. (Enabled by default)                                                                                       |
+| updog boys       | Disables "^" in the execute-extended-command line                                                                                          |
+| avy              | Tree package                                                                                                                               |
+| remove syntax    | Removes syntax highlighting for the current line you are working on (Enabled by default)                                                   |
+| rainbow-mode     | Rainbow colors for parenthesis                                                                                                             |
+| haskell          | Haskell language prefrences                                                                                                                |
+| python           | Python language prefrences                                                                                                                 |
+| C/C++            | C/C++ language prefrences                                                                                                                  |
+| C#               | C# language prefrences                                                                                                                     |
+| org              | Org settings and customization below it                                                                                                    |
+| custom functions | This will take you to the custom functions in the init file                                                                                |
+| doom             | Doom optimizations and theme settings (use n to shuffle through doom stuff)                                                                |
+| memory           | memory threshold settings                                                                                                                  |
+| restart          | enable/disable emacs restart with buffers / shortcut for function                                                                          |
