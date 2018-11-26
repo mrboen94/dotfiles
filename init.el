@@ -6,6 +6,18 @@
 ;;; Code:
 
 ;; This is an alist that helps emacs starting up faster, makes conifguration of packages very modular.
+;; Increase memory emacs is allowed to use, boosts the startup time slightly.
+(setq gc-cons-threshold 402653184
+      gc-cons-percentage 0.6)
+
+;; Doom startup optimization
+(defvar doom--file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+;; More doom optimizations
+(setq package-enable-at-startup nil ; don't auto-initialize!
+      ;; don't add that `custom-set-variables' block to my initl!
+      package--init-file-ensured t)
+
 (setq package-archives
   '(("gnu" . "https://elpa.gnu.org/packages/")
     ("melpa" . "https://melpa.org/packages/")
@@ -22,9 +34,6 @@
 (eval-when-compile
   (require 'use-package))
 (package-initialize)
-
-;; Increase memory emacs is allowed to use, boosts the startup time slightly.
-(setq gc-cons-threshold 10000000)
 
 ;; Restore after startup
 (add-hook 'after-init-hook
@@ -431,8 +440,15 @@
   :config
   ;; Restart emacs with current buffers (PS: BETA)
   (setq restart-emacs-restore-frames 't))
-;;  (global-set-key "\C-c\C-q" 'restart-emacs))
 
+;; Doom startup optimization
+(add-hook 'emacs-startup-hook
+  (setq file-name-handler-alist doom--file-name-handler-alist))
+
+;; Resetting of memory threshold from start of file.
+(add-hook 'emacs-startup-hook
+  (setq gc-cons-threshold 16777216
+        gc-cons-percentage 0.1))
 
 ;;(Custom-set-faces)
  ;; custom-set-faces was added by Custom.
@@ -456,18 +472,3 @@
  '(package-selected-packages
    (quote
     (htmlize ivy use-package evil-leader org-agenda-property restart-emacs which-key helm doom-themes dracula-theme evil org))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-document-title ((t (:inherit default :weight normal :foreground "Black" :font "Lucida Grande" :height 1.33 :underline nil))))
- '(org-level-1 ((t (:foreground "#A83434" :height 1.33))))
- '(org-level-2 ((t (:foreground "#D43C47" :height 1.33))))
- '(org-level-3 ((t (:foreground "#EF553C" :height 1.33))))
- '(org-level-4 ((t (:foreground "#F37717"))))
- '(org-level-5 ((t (:foreground "#F68E00"))))
- '(org-level-6 ((t (:foreground "#FBAF00"))))
- '(org-level-7 ((t (:foreground "#F4D128"))))
- '(org-level-8 ((t (:foreground "#F1D700")))))
-;;; filename ends here
