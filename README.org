@@ -3,12 +3,10 @@
 Just some of my dotfiles
 
 ** Firefox
-[[file:images/mypicture.pdf][this picture]]
 [[file:firefox/][firefox]]
 
 [[file:firefox/home.html][Firefox homepage]]
 
 ** Emacs
 
-[[file:emacs/README.org]LokEmacs]
-
+[[file:emacs/]LokEmacs]]
