@@ -9,4 +9,4 @@ Just some of my dotfiles
 
 ** Emacs
 
-[[file:emacs/]LokEmacs]]
+[[file:emacs/][LokEmacs]]
