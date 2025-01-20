@@ -1,0 +1,60 @@
+# greeting
+set -U fish_greeting
+function fish_greeting
+    echo Oops, here I go (set_color red)hacking(set_color normal) again!
+    echo The time is (set_color yellow; date +%T; set_color normal)
+
+end
+
+# fnm node version update
+set set_node_version
+function set_node_version
+    ln -s "$(which node)" /usr/local/bin/node
+    ln -s "$(which npm)" /usr/local/bin/npm
+end
+
+# aliases
+alias l="ls -la"
+alias bi="brew install"
+alias bu="brew uninstall"
+alias gs="git status"
+alias confish="nvim /Users/mathiasboe/.config/fish/config.fish"
+alias convim="nvim /Users/mathiasboe/.config/nvim/init.lua"
+alias convimp="nvim /Users/mathiasboe/.config/nvim/lua/"
+alias vim="nvim"
+alias vi="nvim"
+alias fed="cd /Users/mathiasboe/.config/"
+alias projects="cd /Users/mathiasboe/Documents/Projects/"
+alias work="cd /Users/mathiasboe/Documents/Work/"
+
+#fnm
+fnm env --shell fish --use-on-cd | source
+
+# 1Password SSH 
+set SSH_AUTH_SOCK $HOME/.1password/agent.sock
+
+# go
+test -d /usr/local/go/bin; and fish_add_path /usr/local/go/bin/
+
+# homebrew
+if test -d /opt/homebrew; and test (arch) = "arm64"; and test "$os" = "Darwin"
+  set -gx HOMEBREW_PREFIX "/opt/homebrew";
+  set -gx HOMEBREW_CELLAR "/opt/homebrew/Cellar";
+  set -gx HOMEBREW_REPOSITORY "/opt/homebrew";
+  set -q PATH; or set PATH ''; set -gx PATH "/opt/homebrew/bin" "/opt/homebrew/sbin" $PATH;
+  set -q MANPATH; or set MANPATH ''; set -gx MANPATH "/opt/homebrew/share/man" $MANPATH;
+  set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "/opt/homebrew/share/info" $INFOPATH;
+  fish_add_path /opt/homebrew/bin
+  set -gx HOMEBREW_NO_ENV_HINTS 1
+end
+
+if status is-interactive
+    starship init fish | source
+    fnm env --use-on-cd | source
+    set -g theme_color_scheme nord
+end
+
+# functions
+function ..; cd ..; end
+function ...; cd ../..; end
+function ....; cd ../../..; end
