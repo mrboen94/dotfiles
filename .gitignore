@@ -1,5 +1,58 @@
-*
-!.gitignore
-!init.el
-!README.org
-!WhatDoesMyPackagesDo.org
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary and backup files
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+
+# Vim/Neovim swap/shadow files
+*.un~
+.netrwhist
+.viminfo
+.vim/
+.vimrc~
+
+# VSCode config
+.vscode/
+*.code-workspace
+
+# Go build artifacts
+bin/
+*.exe
+*.out
+*.test
+
+# Git metadata from cloned dotfiles
+dotfiles/**/.git/
+dotfiles/**/.gitignore
+
+# Node/npm stuff (if you ever integrate it for something like theme generation)
+node_modules/
+package-lock.json
+npm-debug.log
+
+# Emacs
+.emacs.d/elpa/
+.emacs.d/auto-save-list/
+.emacs.d/.#*
+*.elc
+
+# Firefox cache (if syncing profiles)
+firefox/**/cache2/
+firefox/**/startupCache/
+
+# Custom cache or compiled configs
+.cache/
+tmp/
+build/
+
+# Ignore personal override configs (optional)
+secrets.yaml
+config.local.*
+
