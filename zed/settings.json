@@ -1,0 +1,35 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "base_keymap": "JetBrains",
+  "theme": "Catppuccin Latte",
+  "formatter": "language_server",
+  "format_on_save": "on",
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "ui_font_family": "PragmataPro Mono Liga",
+  "buffer_font_family": "PragmataPro Mono Liga",
+  "show_line_numbers": true,
+  "show_indent_guides": true,
+  "show_invisibles": true,
+  "show_gutter": true,
+  "show_print_margin": true,
+  "print_margin_column": 80,
+  "highlight_active_line": true,
+  "highlight_selected_word": true,
+  "auto_complete": true,
+  "auto_close_tags": true,
+  "auto_close_brackets": true,
+  "auto_close_quotes": true,
+  "auto_indent": true,
+  "auto_pair": true,
+  "auto_surround": true,
+  "drag_and_drop": true
+}
