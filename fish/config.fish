@@ -105,6 +105,7 @@ if test -d /opt/homebrew; and test (arch) = "arm64"; and test "$os" = "Darwin"
 end
 
 if status is-interactive
+    set -gx STARSHIP_CONFIG ~/.config/wezterm/starship.toml
     starship init fish | source
     fnm env --use-on-cd | source
     set -g theme_color_scheme nord
