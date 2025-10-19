@@ -1,14 +1,11 @@
 local wezterm = require("wezterm") -- Wezterm API import
-local override_user_var = wezterm.plugin.require("https://github.com/mrboen94/wezterm-config.nvim").override_user_var -- Allows neovim to control this config via override_user_var
+local override_user_var = wezterm.plugin.require("https://github.com/mrboen94/wezterm-config.nvim")
+	.override_user_var             -- Allows neovim to control this config via override_user_var
 local config = {}
 
 --------------------------------------------------------------------------------
 -- Appearance Helpers
 --------------------------------------------------------------------------------
-
-local function scheme_for_appearance(appearance)
-	return appearance:find("Dark") and "aethirlight" or "aethirlight"
-end
 
 local function get_background_blur(_)
 	return 10
@@ -22,7 +19,7 @@ end
 -- UI / UX Settings
 --------------------------------------------------------------------------------
 
-config.color_scheme = "aethirlight"
+-- config.color_scheme = "aethirlight"
 config.use_fancy_tab_bar = true
 config.window_decorations = "RESIZE"
 config.window_frame = {
@@ -47,8 +44,8 @@ config.window_padding = {
 }
 config.adjust_window_size_when_changing_font_size = false
 config.hide_tab_bar_if_only_one_tab = true
-config.window_background_opacity = get_background_opacity(wezterm.gui.get_appearance())
-config.macos_window_background_blur = get_background_blur(wezterm.gui.get_appearance())
+config.window_background_opacity = get_background_opacity()
+config.macos_window_background_blur = get_background_blur()
 
 --------------------------------------------------------------------------------
 -- Keybindings

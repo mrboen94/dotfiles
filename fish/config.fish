@@ -34,14 +34,10 @@ alias confish="nvim $HOME/.config/fish/config.fish"
 alias convim="nvim $HOME/.config/nvim/init.lua"
 alias convimp="nvim $HOME/.config/nvim/lua/"
 alias fed="cd $HOME/.config/"
-alias projects="cd $HOME/Documents/Projects/"
-alias work="cd $HOME/Documents/Work/"
-alias learniken="cd $HOME/Documents/Work/Learniken/"
-
-if command -v brew > /dev/null
-    alias bi="brew install"
-    alias bu="brew uninstall"
-end
+alias projects="cd $HOME/Projects/"
+alias work="cd $HOME/Work/"
+alias cloudWork="cd $HOME/Documents/Work/Learniken/"
+alias cloudProjects="cd $HOME/Documents/Projects/"
 
 switch $current_os
     case darwin
@@ -86,12 +82,15 @@ end
 if test -d "/usr/local/go/bin"; fish_add_path "/usr/local/go/bin"; end
 if test -d "$HOME/go/bin"; fish_add_path "$HOME/go/bin"; end
 
-switch $current_os
-    case darwin
-        if command -v brew > /dev/null
-            set -gx HOMEBREW_NO_ENV_HINTS 1
-            brew shellenv | source
-        end
+if test -d /opt/homebrew; and test (arch) = "arm64"; and test "$current_os" = "Darwin"
+  set -gx HOMEBREW_PREFIX "/opt/homebrew";
+  set -gx HOMEBREW_CELLAR "/opt/homebrew/Cellar";
+  set -gx HOMEBREW_REPOSITORY "/opt/homebrew";
+  set -q PATH; or set PATH ''; set -gx PATH "/opt/homebrew/bin" "/opt/homebrew/sbin" $PATH;
+  set -q MANPATH; or set MANPATH ''; set -gx MANPATH "/opt/homebrew/share/man" $MANPATH;
+  set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "/opt/homebrew/share/info" $INFOPATH;
+  fish_add_path /opt/homebrew/bin
+  set -gx HOMEBREW_NO_ENV_HINTS 1
 end
 
 if status is-interactive
@@ -122,3 +121,8 @@ end
 if test -f "$HOME/.config/op/plugins.sh"
     source "$HOME/.config/op/plugins.sh"
 end
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+fish_add_path $HOME/.local/bin

@@ -1,52 +1,67 @@
--- This file contains custom keymaps for Neovim.
--- It is loaded via `require('custom.plugins')` in your main init.lua.
-
+-- Custom keymaps configured via lazy.nvim by extending which-key (optional)
 return {
-  -- Neotree toggle and focus
-  vim.keymap.set('n', '<leader>tt', ':Neotree position=right source=filesystem action=show toggle=true<CR>', { desc = 'Toggle neotree' }),
+	'folke/which-key.nvim',
+	optional = true, -- apply even if which-key is disabled
+	init = function()
+		local map = vim.keymap.set
 
-  -- Window management:
-  -- Splits:
-  vim.keymap.set('n', '<leader>wV', ':vsplit<CR>', { desc = 'Vertical [S]plit' }),
-  vim.keymap.set('n', '<leader>wH', ':split<CR>', { desc = 'Horizontal [S]plit' }),
-  -- Note: The original config had a duplicated <leader>wsh for "Split left".
-  -- Generic vertical/horizontal splits are kept. Directional splits are removed to avoid conflict and redundancy.
-  -- You can achieve "split left/right/up/below" by combining splits and window movements if needed.
+		-- Neotree toggle and focus
+		map('n', '<leader>tt', ':Neotree position=right source=filesystem action=show toggle=true<CR>',
+			{ desc = 'Toggle neotree' })
 
-  -- Go to other window
-  vim.keymap.set('n', '<leader>ww', '<C-w>w', { desc = 'Goto other window' }),
+		-- Window management
+		-- Basic splits
+		map('n', '<leader>wV', ':vsplit<CR>', { desc = 'Vertical split' })
+		map('n', '<leader>wH', ':split<CR>', { desc = 'Horizontal split' })
 
-  -- Window Movements:
-  vim.keymap.set('n', '<leader>wh', '<C-w>h', { desc = 'Window left' }),
-  vim.keymap.set('n', '<leader>wj', '<C-w>j', { desc = 'Window below' }),
-  vim.keymap.set('n', '<leader>wk', '<C-w>k', { desc = 'Window up' }),
-  vim.keymap.set('n', '<leader>wl', '<C-w>l', { desc = 'Window right' }),
+		-- Directional splits (restore <leader>ws{h,j,k,l})
+		map('n', '<leader>wsh', ':leftabove vsplit<CR>', { desc = 'Split left' })
+		map('n', '<leader>wsl', ':rightbelow vsplit<CR>', { desc = 'Split right' })
+		map('n', '<leader>wsj', ':rightbelow split<CR>', { desc = 'Split below' })
+		map('n', '<leader>wsk', ':leftabove split<CR>', { desc = 'Split above' })
 
-  -- Opening and quitting
-  -- Note: ':c' is for closing the current window in a quickfix list, not a general kill window.
-  -- For killing current window, consider `:close` or `:q`.
-  vim.keymap.set('n', '<leader>wqq', ':close<CR>', { desc = 'Kill current window' }), -- Changed from :c
-  vim.keymap.set('n', '<leader>wqo', ':only<CR>', { desc = 'Kill other windows' }), -- Changed from :on
+		-- Go to other window
+		map('n', '<leader>ww', '<C-w>w', { desc = 'Goto other window' })
 
-  -- Vim actions
-  vim.keymap.set('n', '<leader>fs', ':w<CR>', { desc = 'Save file' }),
-  vim.keymap.set('n', '<leader>qs', ':wq<CR>', { desc = 'Save file and quit' }),
-  vim.keymap.set('n', '<leader>qq', ':q<CR>', { desc = 'Quit' }),
-  vim.keymap.set('n', '<leader>qf', ':q!<CR>', { desc = 'Force quit vim' }),
-  vim.keymap.set('n', '<leader>qa', ':qa!<CR>', { desc = 'Force quit all' }),
+		-- Window movements
+		map('n', '<leader>wh', '<C-w>h', { desc = 'Window left' })
+		map('n', '<leader>wj', '<C-w>j', { desc = 'Window down' })
+		map('n', '<leader>wk', '<C-w>k', { desc = 'Window up' })
+		map('n', '<leader>wl', '<C-w>l', { desc = 'Window right' })
 
-  -- Format file using conform.nvim
-  vim.keymap.set('n', '<C-f>', function()
-    require('conform').format { async = true, lsp_format = 'fallback' }
-  end, { desc = 'Format file' }),
-  vim.keymap.set('n', '<leader>ff', function()
-    require('conform').format { async = true, lsp_format = 'fallback' }
-  end, { desc = 'Format file' }),
+		-- Closing/only
+		map('n', '<leader>wqq', ':close<CR>', { desc = 'Close current window' })
+		map('n', '<leader>wqo', ':only<CR>', { desc = 'Close other windows' })
 
-  -- Toggle relative line numbers
-  vim.keymap.set('n', '<C-l>', ':set invrelativenumber<CR>', { desc = 'Toggle relative line numbers' }),
+		-- File/Vim actions
+		map('n', '<leader>fs', ':w<CR>', { desc = 'Save file' })
+		map('n', '<leader>qs', ':wq<CR>', { desc = 'Save and quit' })
+		map('n', '<leader>qq', ':q<CR>', { desc = 'Quit' })
+		map('n', '<leader>qf', ':q!<CR>', { desc = 'Force quit' })
+		map('n', '<leader>qa', ':qa!<CR>', { desc = 'Quit all (force)' })
 
-  -- Copy to clipboard (system clipboard)
-  vim.keymap.set('n', '<C-c>', '"*y', { noremap = true, desc = 'Copy to system clipboard (Normal mode)' }), -- Removed <CR>
-  vim.keymap.set('v', '<C-c>', '"*y', { noremap = true, desc = 'Copy to system clipboard (Visual mode)' }), -- Removed <CR>
+		-- Format file using conform.nvim
+		map('n', '<C-f>', function()
+			require('conform').format { async = true, lsp_format = 'fallback' }
+		end, { desc = 'Format file' })
+		map('n', '<leader>f<leader>', function()
+			require('conform').format { async = true, lsp_format = 'fallback' }
+		end, { desc = 'Format file' })
+
+		-- Toggle relative line numbers
+		map('n', '<C-l>', ':set invrelativenumber<CR>', { desc = 'Toggle relative line numbers' })
+
+		-- Copy to system clipboard
+		map('n', '<C-c>', '"*y', { noremap = true, desc = 'Copy to system clipboard (Normal)' })
+		map('v', '<C-c>', '"*y', { noremap = true, desc = 'Copy to system clipboard (Visual)' })
+
+		-- which-key group labels (if which-key active)
+		pcall(function()
+			local wk = require 'which-key'
+			wk.add({
+				{ '<leader>w',  group = 'Window' },
+				{ '<leader>ws', group = 'Split' },
+			})
+		end)
+	end,
 }
