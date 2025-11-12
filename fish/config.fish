@@ -14,8 +14,8 @@ set -l current_os (string lower (uname))
 # --- Pyenv ---
 if command -v pyenv > /dev/null
     pyenv init - | source
-else
-    echo "fish: pyenv command not found. Skipping pyenv initialization."
+		# else
+		# echo "fish: pyenv command not found. Skipping pyenv initialization."
 end
 
 # --- FNM ---
@@ -30,7 +30,7 @@ alias l="ls -la"
 alias gs="git status"
 alias vim="nvim"
 alias vi="nvim"
-alias confish="nvim $HOME/Documents/projects/fish/config.fish"
+alias confish="nvim $HOME/Documents/projects/dotfiles/fish/config.fish"
 alias convim="nvim $HOME/Documents/projects/dotfiles/nvim/init.lua"
 alias convimp="nvim $HOME/Documents/projects/dotfiles/nvim/lua/"
 alias fed="cd $HOME/Documents/projects/dotfiles/"
