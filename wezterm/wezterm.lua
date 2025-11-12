@@ -1,11 +1,14 @@
-local wezterm = require("wezterm") -- Wezterm API import
+local wezterm = require('wezterm')
+local wezterm_config_nvim = wezterm.plugin.require('https://github.com/winter-again/wezterm-config.nvim')
 local override_user_var = wezterm.plugin.require("https://github.com/mrboen94/wezterm-config.nvim")
-	.override_user_var             -- Allows neovim to control this config via override_user_var
+	.override_user_var -- Allows neovim to control this config via override_user_var
 local config = {}
 
 --------------------------------------------------------------------------------
 -- Appearance Helpers
 --------------------------------------------------------------------------------
+-- Setting fish as default shell
+config.default_prog = { '/opt/homebrew/bin/fish', '-l' }
 
 local function get_background_blur(_)
 	return 10
@@ -48,6 +51,12 @@ config.window_background_opacity = get_background_opacity()
 config.macos_window_background_blur = get_background_blur()
 
 --------------------------------------------------------------------------------
+-- Features and settings
+--------------------------------------------------------------------------------
+
+config.scrollback_lines = 3500
+
+--------------------------------------------------------------------------------
 -- Keybindings
 --------------------------------------------------------------------------------
 
@@ -67,7 +76,7 @@ wezterm.on("clear-overrides", function(window, _)
 	wezterm.log_info("[wezterm.lua] Config overrides cleared.")
 end)
 
-wezterm.on("user-var-changed", function(window, pane, name, value)
+wezterm.on('user-var-changed', function(window, pane, name, value)
 	local overrides = window:get_config_overrides() or {}
 	overrides = override_user_var(overrides, name, value)
 	window:set_config_overrides(overrides)

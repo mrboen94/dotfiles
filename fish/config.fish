@@ -30,14 +30,12 @@ alias l="ls -la"
 alias gs="git status"
 alias vim="nvim"
 alias vi="nvim"
-alias confish="nvim $HOME/.config/fish/config.fish"
-alias convim="nvim $HOME/.config/nvim/init.lua"
-alias convimp="nvim $HOME/.config/nvim/lua/"
-alias fed="cd $HOME/.config/"
-alias projects="cd $HOME/Projects/"
-alias work="cd $HOME/Work/"
-alias cloudWork="cd $HOME/Documents/Work/Learniken/"
-alias cloudProjects="cd $HOME/Documents/Projects/"
+alias confish="nvim $HOME/Documents/projects/fish/config.fish"
+alias convim="nvim $HOME/Documents/projects/dotfiles/nvim/init.lua"
+alias convimp="nvim $HOME/Documents/projects/dotfiles/nvim/lua/"
+alias fed="cd $HOME/Documents/projects/dotfiles/"
+alias projects="cd $HOME/Documents/projects/"
+alias work="cd $HOME/Documents/work/"
 
 switch $current_os
     case darwin
@@ -126,3 +124,8 @@ end
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 fish_add_path $HOME/.local/bin
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/mathiasboe/.lmstudio/bin
+# End of LM Studio CLI section
+

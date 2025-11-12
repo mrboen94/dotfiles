@@ -1,4 +1,3 @@
-local default_font_size = 18
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -201,73 +200,6 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
-  },
-  {
-    -- Wezterm config plugin
-    'winter-again/wezterm-config.nvim',
-    config = function()
-      local wezterm_config = require 'wezterm-config'
-
-      wezterm_config.setup {
-        append_wezterm_to_rtp = false,
-      }
-
-      local set_wezterm_font = function(font_name, notify_message)
-        wezterm_config.set_wezterm_user_var('font', font_name)
-        vim.notify(notify_message, vim.log.levels.INFO, { title = 'Wezterm Config' })
-      end
-
-      -- Function to trigger the font selection UI for Neovim GUI
-      local change_font = function()
-        local fonts = {
-          'PragmataPro Mono Liga', -- Default monospace font
-          'Comic Code Ligatures',
-        }
-
-        vim.ui.select(fonts, {
-          prompt = 'Select a font:',
-        }, function(font)
-          if font then
-            set_wezterm_font(font, 'Font changed to: ' .. font)
-          end
-        end)
-      end
-      -- local set_wezterm_font = function(font_name, notify_message)
-      --   wezterm_config.set_wezterm_user_var('font', font_name)
-      --   vim.notify(notify_message, vim.log.levels.INFO, { title = 'Wezterm Config' })
-      -- end
-
-      local reset_font_size = function()
-        wezterm_config.set_wezterm_user_var('font_size', default_font_size)
-      end
-
-      local set_wezterm_font_size = function(size, notify_message)
-        local size_num = tonumber(size)
-        if size_num then
-          wezterm_config.set_wezterm_user_var('font_size', tostring(size_num))
-          vim.notify(notify_message, vim.log.levels.INFO, { title = 'Wezterm Config' })
-        else
-          vim.notify('Invalid font size input', vim.log.levels.ERROR, { title = 'Wezterm Config' })
-        end
-      end
-
-      local prompt_for_font_size = function()
-        vim.ui.input({ prompt = 'Enter font size: ' }, function(input)
-          if input then
-            set_wezterm_font_size(input, 'Set Wezterm font size to ' .. input)
-          end
-        end)
-      end
-
-      -- Keymap to reset font size
-      vim.keymap.set('n', '<leader>wpr', reset_font_size, { desc = 'Reset Wezterm Font Size' })
-
-      -- Keymap to set Font Size
-      vim.keymap.set('n', '<leader>wps', prompt_for_font_size, { desc = 'Set Wezterm Font Size' })
-
-      -- Keymap to set font
-      vim.keymap.set('n', '<leader>wpp', change_font, { desc = 'Change Font' })
-    end,
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.

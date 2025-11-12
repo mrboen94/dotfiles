@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Env files
+.env
+
+# Node modules
+node_modules/
+# Build directories
+dist/
+build/
+
+# AI State files
+.ai/
+WARP.md

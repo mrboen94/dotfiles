@@ -36,7 +36,6 @@
 ;; Makes sure the use-package are ready when you start emacs
 (eval-when-compile
   (require 'use-package))
-(package-initialize)
 
 ;; Restore after startup
 (add-hook 'after-init-hook
@@ -70,7 +69,7 @@
 (global-visual-line-mode 1)
 (tool-bar-mode -1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace) ; Delete whitespace at end of lines
-(set-frame-font "Iosevka" nil t)                         ; Change the font
+(set-frame-font "Comic Code Ligatures" nil t)                         ; Change the font
 (setq ring-bell-function 'ignore)
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)) ; Imporve look and feel
 (add-to-list 'default-frame-alist '(ns-appearance . dark))        ; Imporve look and feel
@@ -322,17 +321,6 @@
          (relative-package-path (directory-file-name (file-name-directory (file-relative-name filename gopath-src-path)))))
     (setq go-guru-scope relative-package-path)))
 
-;; haskell
-(use-package haskell-mode)
-(use-package hindent)
-(use-package ghc
-  :config
-  (add-hook 'haskell-mode-hook (lambda () (ghc-init))))
-
-(use-package company-ghc
-  :config
-  (add-to-list 'company-backends 'company-ghc))
-
 ;; python
 (use-package anaconda-mode
   :config
@@ -349,7 +337,6 @@
   :hook (flycheck-mode . flycheck-irony-setup))
 
 ;; C#
-(use-package csharp-mode)
 (use-package omnisharp
   :hook ((csharp-mode . omnisharp-mode)
          (before-save . omnisharp-code-format-entire-file))
@@ -469,9 +456,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (restart-emacs sx writegood-mode ox-twbs doom-themes org-bullets omnisharp csharp-mode flycheck-irony company-irony irony anaconda-mode company-ghc ghc hindent haskell-mode go-guru godoctor go-eldoc go-mode markdown-mode web-mode git-timemachine git-gutter magit exec-path-from-shell fzf smart-dash aggressive-indent counsel general rainbow-mode rainbow-delimiters smartparens focus emojify feebleline neotree expand-region ace-window avy which-key ivy-hydra ivy smex evil use-package))))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
