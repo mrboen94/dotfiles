@@ -20,15 +20,15 @@ Leader key: `<Space>`
 
 ## File Operations
 
-| Key                 | Action           |
-| ------------------- | ---------------- |
-| `<leader>fs`        | Save file        |
-|| `<leader>ff`        | Format file      |
-| `<C-f>`             | Format file      |
-| `<leader>qq`        | Quit             |
-| `<leader>qs`        | Save and quit    |
-| `<leader>qf`        | Force quit       |
-| `<leader>qa`        | Quit all (force) |
+| Key          | Action           |
+| ------------ | ---------------- |
+| `<leader>fs` | Save file        |
+| `<leader>ff` | Format file      |
+| `<C-f>`      | Format file      |
+| `<leader>qq` | Quit             |
+| `<leader>qs` | Save and quit    |
+| `<leader>qf` | Force quit       |
+| `<leader>qa` | Quit all (force) |
 
 ## Window Management
 
@@ -229,44 +229,52 @@ Automatically detects project type (npm, Cargo, Go, Make, Odin, Python)
 
 ## Arrow (Alternative File Switcher)
 
-| Key | Action                           |
-| --- | -------------------------------- |
-| `ø` | Open Arrow global bookmarks      |
-| `å` | Open Arrow buffer bookmarks      |
-| `'` | Reveal current file in Neo-tree  |
+| Key | Action                          |
+| --- | ------------------------------- |
+| `ø` | Open Arrow global bookmarks     |
+| `å` | Open Arrow buffer bookmarks     |
+| `'` | Reveal current file in Neo-tree |
 
 ## Wezterm Integration
 
-| Key           | Action                            |
-| ------------- | --------------------------------- |
-| `<leader>wpr` | Reset Wezterm font size to 18     |
-| `<leader>wps` | Set custom Wezterm font size      |
-| `<leader>wpp` | Change Wezterm font               |
+| Key           | Action                        |
+| ------------- | ----------------------------- |
+| `<leader>wpr` | Reset Wezterm font size to 18 |
+| `<leader>wps` | Set custom Wezterm font size  |
+| `<leader>wpp` | Change Wezterm font           |
 
 ## Plugins
 
 ### Core Plugins
 
 #### lazy.nvim
+
 Plugin manager that handles installation and lazy-loading.
+
 - Automatically installs plugins on first run
 - Only loads plugins when needed for better startup time
 - `:Lazy` to manage plugins
 
 #### which-key.nvim
+
 Keymap helper that shows available keys.
+
 - Press `<Space>` and wait 300ms to see available commands
 - Groups commands logically (w=window, f=find, g=git, etc.)
 - Self-documenting keybinds
 
 #### nvim-treesitter
+
 Advanced syntax highlighting and code understanding.
+
 - Better syntax highlighting than regex-based
 - Powers indent, folding, text objects
 - Auto-installs parsers for opened file types
 
 #### LSP Stack (nvim-lspconfig, mason)
+
 Language server protocol support for IDE features.
+
 - **mason.nvim**: GUI package manager for LSP servers
 - **mason-lspconfig**: Auto-setup installed servers
 - **mason-tool-installer**: Auto-install configured tools
@@ -274,14 +282,18 @@ Language server protocol support for IDE features.
 - `:Mason` to install servers
 
 #### blink.cmp
+
 Fast, modern completion engine.
+
 - **Super-tab** preset: Tab to accept completion
 - Auto-shows documentation after 500ms
 - Integrates with LSP, snippets, file paths
 - **LuaSnip**: Snippet engine with friendly-snippets collection
 
 #### conform.nvim
+
 Code formatting with multiple formatters.
+
 - Auto-formats on save (except C/C++)
 - Per-filetype formatters (Prettier for JS/TS, stylua for Lua)
 - `<leader>ff` or `<C-f>` to format manually
@@ -289,27 +301,35 @@ Code formatting with multiple formatters.
 ### File & Search
 
 #### telescope.nvim
+
 Fuzzy finder for everything.
+
 - Search files, text, buffers, help, keymaps
 - **telescope-fzf-native**: Native FZF for faster sorting
 - **telescope-ui-select**: Better vim.ui.select interface
 - All keybinds under `<leader>s`
 
 #### neo-tree.nvim
+
 Modern file explorer with git status.
+
 - Shows on right side, 30 columns wide
 - Git status indicators (added, modified, staged)
 - `<leader>tt` to toggle, `'` to reveal current file
 - Many file operations: create, delete, rename, copy
 
 #### flash.nvim
+
 Jump to any location with 2 characters.
+
 - `s` + 2 chars: jump anywhere on screen
 - `S`: treesitter-aware jump (functions, classes)
 - Faster than f/t/w/b motions
 
 #### arrow.nvim
+
 Persistent file bookmarks (Norwegian keyboard friendly).
+
 - `ø`: global bookmarks across all projects
 - `å`: buffer-specific bookmarks
 - Saves across Neovim sessions
@@ -318,7 +338,9 @@ Persistent file bookmarks (Norwegian keyboard friendly).
 ### Git Integration
 
 #### gitsigns.nvim
+
 Git indicators and operations.
+
 - Shows +/~/- in gutter for changes
 - Stage/unstage/reset hunks
 - Blame line, preview changes, diff
@@ -327,14 +349,18 @@ Git indicators and operations.
 ### Development Tools
 
 #### overseer.nvim
+
 Task runner with project auto-detection.
+
 - Detects: npm, Cargo, Go, Make, Odin, Python
 - Runs: build, dev/run, test, lint commands
 - Shows output in toggleable split
 - `<leader>ro` to toggle output panel
 
 #### nvim-dap (Debug Adapter Protocol)
+
 Full debugging with breakpoints and stepping.
+
 - Breakpoints, conditional breakpoints, log points
 - Step into/over/out, continue, restart
 - Variable inspection, hover values, expression eval
@@ -342,45 +368,59 @@ Full debugging with breakpoints and stepping.
 - Supports: C, C++, Rust, Odin, Go
 
 #### nvim-dap-ui
+
 Beautiful debugging interface.
+
 - Auto-opens when debugging starts
 - Shows: variables, watches, stack, breakpoints, console
 - Resizable panels, customizable layout
 - `<leader>du` to toggle
 
 #### nvim-dap-virtual-text
+
 Inline variable values during debugging.
+
 - Shows variable values next to code
 - Updates in real-time while stepping
 - No need to hover or check watch window
 
 #### mason-nvim-dap
+
 Auto-install debug adapters.
+
 - Installs codelldb for C/C++/Rust/Odin
 - Integrates with Mason package manager
 
 ### UI/UX Enhancement
 
 #### trouble.nvim
+
 Better diagnostics and quickfix interface.
+
 - Prettier display than default quickfix
 - Groups by severity, file, type
 - `<leader>xx` for diagnostics, `<leader>xq` for quickfix
 
 #### harpoon (v2)
+
 Quick file switcher with numbered marks.
+
 - Mark up to 5 active files
 - Switch instantly with `<leader>1-5`
 - Faster than Telescope for active files
 - `<leader>ha` to add, `<leader>hh` for menu
 
 #### todo-comments.nvim
+
 Highlight special comments.
+
 - Colorful highlighting for TODO, FIXME, NOTE, HACK, WARN
 - Search all TODOs with `:TodoTelescope`
 
 #### mini.nvim (Collection)
+
 Multiple small, independent plugins.
+
 - **mini.ai**: Enhanced text objects (better `vi)`, `va{`)
 - **mini.surround**: Add/delete/change surroundings
   - `saiw)`: surround word with ()
@@ -389,31 +429,41 @@ Multiple small, independent plugins.
 - **mini.statusline**: Fast, clean statusline
 
 #### neoscroll.nvim
+
 Smooth scrolling animations.
+
 - Makes `<C-d>`, `<C-u>`, `<C-f>`, `<C-b>` smooth
 - Configurable speed and easing (500ms, quadratic)
 - All windows scroll together
 
 #### smear-cursor.nvim
+
 Smooth cursor movement with trail.
+
 - Cursor leaves animated trail
 - Easier to track cursor movement
 - Different settings for insert vs normal mode
 
 #### nvim-highlight-colors
+
 Inline color preview.
+
 - Shows color preview for hex (#ff0000)
 - RGB, HSL, Tailwind color names
 - Helps visualize colors in code
 
 #### nvim-window-picker
+
 Easy window selection.
+
 - Shows letters on windows for quick jumping
 - Used by Neo-tree for file opening
 - Alternative to `<C-w><C-w>`
 
 #### wezterm-config.nvim
+
 Control Wezterm from Neovim.
+
 - Change font, font size from Neovim
 - Settings persist in Wezterm config
 - `<leader>wp` prefix for Wezterm commands
@@ -421,37 +471,49 @@ Control Wezterm from Neovim.
 ### Utility Plugins
 
 #### guess-indent.nvim
+
 Auto-detect indentation.
+
 - Detects tabs vs spaces
 - Detects indent width (2, 4, 8)
 - No manual configuration needed
 
 #### nvim-autopairs
+
 Auto-close brackets and quotes.
+
 - Closes (, [, {, ", ', `
 - Smart deletion (deletes both pair)
 - Integrates with completion
 
 #### indent-blankline
+
 Indentation guides.
+
 - Vertical lines showing indent levels
 - Helpful for Python, YAML, JSON
 - Shows current scope
 
 #### nvim-nio
+
 Async IO library for plugins.
+
 - Core dependency for nvim-dap-ui
 - Provides async operations
 - Used by multiple plugins
 
 #### nvim-web-devicons
+
 File type icons.
+
 - Shows icons in trees, menus, statusline
 - Requires Nerd Font
 - Used by most UI plugins
 
 #### nui.nvim
+
 UI component library.
+
 - Popups, splits, inputs, menus
 - Used by Neo-tree
 - Foundation for plugin UIs
