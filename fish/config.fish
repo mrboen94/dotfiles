@@ -69,6 +69,12 @@ function az-help
         "az-publish <APP_NAME>: Publish function to azure"
 end
 
+if test "$current_os" = "darwin"
+    function ds
+        open "dash://?query=$argv"
+    end
+end
+
 if test -S "$HOME/.1password/agent.sock"
     set -gx SSH_AUTH_SOCK "$HOME/.1password/agent.sock"
 else
@@ -80,7 +86,7 @@ end
 if test -d "/usr/local/go/bin"; fish_add_path "/usr/local/go/bin"; end
 if test -d "$HOME/go/bin"; fish_add_path "$HOME/go/bin"; end
 
-if test -d /opt/homebrew; and test (arch) = "arm64"; and test "$current_os" = "Darwin"
+if test -d /opt/homebrew; and test (arch) = "arm64"; and test "$current_os" = "darwin"
   set -gx HOMEBREW_PREFIX "/opt/homebrew";
   set -gx HOMEBREW_CELLAR "/opt/homebrew/Cellar";
   set -gx HOMEBREW_REPOSITORY "/opt/homebrew";
@@ -120,10 +126,15 @@ if test -f "$HOME/.config/op/plugins.sh"
     source "$HOME/.config/op/plugins.sh"
 end
 
+# BUN
+fish_add_path "$HOME/.bun/bin"
+# End of bun section
+
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 fish_add_path $HOME/.local/bin
+# End of orbstack
 
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH /Users/mathiasboe/.lmstudio/bin
