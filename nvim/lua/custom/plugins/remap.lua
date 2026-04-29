@@ -67,6 +67,12 @@ return {
 		map('n', '<leader>fl', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
 		map('n', '<leader>fh', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic' })
 
+		-- Runetext keymaps
+		map('n', '<leader>trt', ':RuneTextPreviewToggle<CR>', { desc = 'Toggle runetext preview' })
+		map('n', '<leader>trr', ':RuneTextPreviewImageToggle<CR>', { desc = 'Toggle runetext image preview' })
+		map('n', '<leader>trp', ':RuneTextPreviewPdfToggle<CR>', { desc = 'Toggle runetext PDF preview' })
+		map('n', '<leader>trq', ':RuneTextPreviewStop<CR>', { desc = 'Stop Runetext preview' })
+
 		-- Git keymaps
 		map('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Git blame' })
 		map('n', '<leader>gd', ':Gitsigns diffthis<CR>', { desc = 'Git diff' })
@@ -78,43 +84,73 @@ return {
 		-- Task runner keymaps
 		map('n', '<leader>rb', function()
 			local cmd
-			if vim.fn.filereadable('package.json') == 1 then cmd = 'npm run build'
-			elseif vim.fn.filereadable('Cargo.toml') == 1 then cmd = 'cargo build'
-			elseif vim.fn.filereadable('Makefile') == 1 or vim.fn.filereadable('makefile') == 1 then cmd = 'make'
-			elseif vim.fn.filereadable('go.mod') == 1 then cmd = 'go build'
-			elseif vim.fn.glob('*.odin') ~= '' then cmd = 'odin build .'
-			else vim.notify('No build config found', vim.log.levels.WARN) return end
+			if vim.fn.filereadable('package.json') == 1 then
+				cmd = 'npm run build'
+			elseif vim.fn.filereadable('Cargo.toml') == 1 then
+				cmd = 'cargo build'
+			elseif vim.fn.filereadable('Makefile') == 1 or vim.fn.filereadable('makefile') == 1 then
+				cmd = 'make'
+			elseif vim.fn.filereadable('go.mod') == 1 then
+				cmd = 'go build'
+			elseif vim.fn.glob('*.odin') ~= '' then
+				cmd = 'odin build .'
+			else
+				vim.notify('No build config found', vim.log.levels.WARN)
+				return
+			end
 			require('overseer').run_template({ name = 'shell', params = { cmd = cmd } })
 		end, { desc = 'Build' })
 
 		map('n', '<leader>rr', function()
 			local cmd
-			if vim.fn.filereadable('package.json') == 1 then cmd = 'npm run dev'
-			elseif vim.fn.filereadable('Cargo.toml') == 1 then cmd = 'cargo run'
-			elseif vim.fn.filereadable('go.mod') == 1 then cmd = 'go run .'
-			elseif vim.bo.filetype == 'python' then cmd = 'python ' .. vim.fn.expand('%')
-			elseif vim.fn.glob('*.odin') ~= '' then cmd = 'odin run .'
-			else vim.notify('No run config found', vim.log.levels.WARN) return end
+			if vim.fn.filereadable('package.json') == 1 then
+				cmd = 'npm run dev'
+			elseif vim.fn.filereadable('Cargo.toml') == 1 then
+				cmd = 'cargo run'
+			elseif vim.fn.filereadable('go.mod') == 1 then
+				cmd = 'go run .'
+			elseif vim.bo.filetype == 'python' then
+				cmd = 'python ' .. vim.fn.expand('%')
+			elseif vim.fn.glob('*.odin') ~= '' then
+				cmd = 'odin run .'
+			else
+				vim.notify('No run config found', vim.log.levels.WARN)
+				return
+			end
 			require('overseer').run_template({ name = 'shell', params = { cmd = cmd } })
 		end, { desc = 'Run/Dev' })
 
 		map('n', '<leader>rt', function()
 			local cmd
-			if vim.fn.filereadable('package.json') == 1 then cmd = 'npm test'
-			elseif vim.fn.filereadable('Cargo.toml') == 1 then cmd = 'cargo test'
-			elseif vim.fn.filereadable('go.mod') == 1 then cmd = 'go test ./...'
-			elseif vim.fn.filereadable('pytest.ini') == 1 or vim.fn.filereadable('setup.py') == 1 then cmd = 'pytest'
-			elseif vim.fn.glob('*.odin') ~= '' then cmd = 'odin test .'
-			else vim.notify('No test config found', vim.log.levels.WARN) return end
+			if vim.fn.filereadable('package.json') == 1 then
+				cmd = 'npm test'
+			elseif vim.fn.filereadable('Cargo.toml') == 1 then
+				cmd = 'cargo test'
+			elseif vim.fn.filereadable('go.mod') == 1 then
+				cmd = 'go test ./...'
+			elseif vim.fn.filereadable('pytest.ini') == 1 or vim.fn.filereadable('setup.py') == 1 then
+				cmd = 'pytest'
+			elseif vim.fn.glob('*.odin') ~= '' then
+				cmd = 'odin test .'
+			else
+				vim.notify('No test config found', vim.log.levels.WARN)
+				return
+			end
 			require('overseer').run_template({ name = 'shell', params = { cmd = cmd } })
 		end, { desc = 'Test' })
 
 		map('n', '<leader>rl', function()
 			local cmd
-			if vim.fn.filereadable('package.json') == 1 then cmd = 'npm run lint'
-			elseif vim.fn.filereadable('Cargo.toml') == 1 then cmd = 'cargo clippy'
-			elseif vim.fn.filereadable('.eslintrc.js') == 1 or vim.fn.filereadable('.eslintrc.json') == 1 then cmd = 'eslint .'
-			else vim.notify('No lint config found', vim.log.levels.WARN) return end
+			if vim.fn.filereadable('package.json') == 1 then
+				cmd = 'npm run lint'
+			elseif vim.fn.filereadable('Cargo.toml') == 1 then
+				cmd = 'cargo clippy'
+			elseif vim.fn.filereadable('.eslintrc.js') == 1 or vim.fn.filereadable('.eslintrc.json') == 1 then
+				cmd = 'eslint .'
+			else
+				vim.notify('No lint config found', vim.log.levels.WARN)
+				return
+			end
 			require('overseer').run_template({ name = 'shell', params = { cmd = cmd } })
 		end, { desc = 'Lint' })
 
@@ -129,8 +165,10 @@ return {
 		-- Debug keymaps
 		map('n', '<leader>rd', function() require('dap').continue() end, { desc = 'Debug' })
 		map('n', '<leader>db', function() require('dap').toggle_breakpoint() end, { desc = 'Breakpoint' })
-		map('n', '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input('Condition: ')) end, { desc = 'Conditional BP' })
-		map('n', '<leader>dl', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log: ')) end, { desc = 'Log point' })
+		map('n', '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input('Condition: ')) end,
+			{ desc = 'Conditional BP' })
+		map('n', '<leader>dl', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log: ')) end,
+			{ desc = 'Log point' })
 		map('n', '<leader>dc', function() require('dap').continue() end, { desc = 'Continue' })
 		map('n', '<leader>dsi', function() require('dap').step_into() end, { desc = 'Step into' })
 		map('n', '<leader>dso', function() require('dap').step_over() end, { desc = 'Step over' })
@@ -139,7 +177,7 @@ return {
 		map('n', '<leader>dp', function() require('dap.ui.widgets').preview() end, { desc = 'Preview' })
 		map('n', '<leader>dt', function() require('dap').terminate() end, { desc = 'Terminate' })
 		map('n', '<leader>dr', function() require('dap').restart() end, { desc = 'Restart' })
-		
+
 		-- Debug UI controls
 		map('n', '<leader>du', function() require('dapui').toggle() end, { desc = 'Toggle UI' })
 		map('n', '<leader>duo', function() require('dapui').open() end, { desc = 'Open UI' })
@@ -156,6 +194,7 @@ return {
 				{ '<leader>f',  group = 'Find/Nav' },
 				{ '<leader>g',  group = 'Git' },
 				{ '<leader>r',  group = 'Run' },
+				{ '<leader>t',  group = 'Toggle' },
 				{ '<leader>x',  group = 'Trouble' },
 				{ '<leader>d',  group = 'Debug' },
 				{ '<leader>ds', group = 'Step' },

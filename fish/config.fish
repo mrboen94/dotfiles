@@ -36,6 +36,7 @@ alias convimp="nvim $HOME/Documents/projects/dotfiles/nvim/lua/"
 alias fed="cd $HOME/Documents/projects/dotfiles/"
 alias projects="cd $HOME/Documents/projects/"
 alias work="cd $HOME/Documents/work/"
+alias python="python3"
 
 switch $current_os
     case darwin
