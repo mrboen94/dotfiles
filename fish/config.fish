@@ -1,13 +1,10 @@
 # --- Greeting ---
 set -U fish_greeting
 function fish_greeting
-    printf '\e[23m'
     set_color normal
-    printf '\e[3m'
-    echo Oops, here I go (set_color red)hacking(set_color normal; printf '\e[3m') again!
-    echo The time is (set_color yellow; date +%T; set_color normal; printf '\e[3m')
+    echo Oops, here I go (set_color red)hacking(set_color normal;) again!
+    echo The time is (set_color yellow; date +%T; set_color normal;)
     set_color normal
-    printf '\e[23m'
 end
 
 function is_os --argument-names expected_os
