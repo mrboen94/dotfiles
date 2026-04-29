@@ -1,8 +1,13 @@
 # --- Greeting ---
 set -U fish_greeting
 function fish_greeting
-    echo Oops, here I go (set_color red)hacking(set_color normal) again!
-    echo The time is (set_color yellow; date +%T; set_color normal)
+    printf '\e[23m'
+    set_color normal
+    printf '\e[3m'
+    echo Oops, here I go (set_color red)hacking(set_color normal; printf '\e[3m') again!
+    echo The time is (set_color yellow; date +%T; set_color normal; printf '\e[3m')
+    set_color normal
+    printf '\e[23m'
 end
 
 function is_os --argument-names expected_os
@@ -140,4 +145,3 @@ fish_add_path $HOME/.local/bin
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH /Users/mathiasboe/.lmstudio/bin
 # End of LM Studio CLI section
-
