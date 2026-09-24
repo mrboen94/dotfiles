@@ -2,6 +2,7 @@ vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
 return {
 	'nvim-neo-tree/neo-tree.nvim',
+	enabled = false, -- replaced by the snacks explorer (see snacks.lua); config kept for reference
 	version = '*',
 	dependencies = {
 		'nvim-lua/plenary.nvim',
@@ -9,11 +10,7 @@ return {
 		'MunifTanjim/nui.nvim',
 	},
 	lazy = false, -- Keeping lazy = false as it's in the first config. If you want lazy loading, set it to true and ensure you have a way to trigger it (e.g., an autocommand or a specific command).
-	keys = {
-		{ "'", ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
-		-- The '\\' mapping in the second config's window mappings is specific to the Neo-tree window itself.
-		-- The global keybinding here makes more sense for revealing the current file in Neo-tree from anywhere.
-	},
+	-- Keymaps moved to snacks.lua ('|' on Linux / "'" on macOS to reveal, <leader>tt to toggle)
 	config = function()
 		require('neo-tree').setup {
 			close_if_last_window = true,

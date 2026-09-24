@@ -35,7 +35,7 @@ curl -L https://github.com/mrboen94/kvern/releases/latest/download/kvern-linux-a
 
 ## Kvern usage
 
-Don't usage, usage instructions are not clear at the moment, but it works for me, it might work for you. It creates symlinks from the folder to the default .config path.
+Don't use, usage instructions are not clear at the moment, but it works for me, it might work for you. It creates symlinks from the folder to the default .config path.
 
 ```bash
 # Initialize a new kvern workspace

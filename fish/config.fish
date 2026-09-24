@@ -20,12 +20,7 @@ if command -v pyenv > /dev/null
 		# echo "fish: pyenv command not found. Skipping pyenv initialization."
 end
 
-# --- FNM ---
-if command -v fnm > /dev/null
-    fnm env --shell fish --use-on-cd | source
-else
-    echo "fish: fnm command not found. Skipping fnm initialization."
-end
+# --- FNM --- (initialised in conf.d/fnm.fish)
 
 # --- Aliases ---
 alias l="ls -la"
@@ -106,10 +101,6 @@ if status is-interactive
         starship init fish | source
     else
         echo "fish: starship command not found. Skipping Starship initialization."
-    end
-
-    if command -v fnm > /dev/null
-        fnm env --use-on-cd | source
     end
 
     set -g theme_color_scheme nord

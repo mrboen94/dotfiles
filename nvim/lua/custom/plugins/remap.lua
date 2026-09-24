@@ -5,9 +5,7 @@ return {
 	init = function()
 		local map = vim.keymap.set
 
-		-- Neotree toggle and focus
-		map('n', '<leader>tt', ':Neotree position=right source=filesystem action=show toggle=true<CR>',
-			{ desc = 'Toggle neotree' })
+		-- Explorer toggle/reveal keys live in snacks.lua
 
 		-- Window management
 		-- Basic splits
@@ -66,12 +64,6 @@ return {
 		map('n', '<leader>fk', ':cprev<CR>', { desc = 'Prev quickfix' })
 		map('n', '<leader>fl', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
 		map('n', '<leader>fh', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic' })
-
-		-- Runetext keymaps
-		map('n', '<leader>trt', ':RuneTextPreviewToggle<CR>', { desc = 'Toggle runetext preview' })
-		map('n', '<leader>trr', ':RuneTextPreviewImageToggle<CR>', { desc = 'Toggle runetext image preview' })
-		map('n', '<leader>trp', ':RuneTextPreviewPdfToggle<CR>', { desc = 'Toggle runetext PDF preview' })
-		map('n', '<leader>trq', ':RuneTextPreviewStop<CR>', { desc = 'Stop Runetext preview' })
 
 		-- Git keymaps
 		map('n', '<leader>gb', ':Gitsigns blame_line<CR>', { desc = 'Git blame' })

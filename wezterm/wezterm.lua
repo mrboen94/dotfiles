@@ -8,7 +8,15 @@ local config = {}
 -- Appearance Helpers
 --------------------------------------------------------------------------------
 -- Setting fish as default shell
-config.default_prog = { '/opt/homebrew/bin/fish', '-l' }
+local fish_path
+if wezterm.target_triple:find('apple%-darwin') then
+	fish_path = '/opt/homebrew/bin/fish'
+elseif wezterm.target_triple:find('linux') then
+	fish_path = '/usr/bin/fish'
+end
+if fish_path then
+	config.default_prog = { fish_path, '-l' }
+end
 
 local function get_background_blur(_)
 	return 10
