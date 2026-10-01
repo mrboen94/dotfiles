@@ -62,3 +62,17 @@ kvern link --backup --force <paths...>
 # Preview changes without making them
 kvern link --dry-run <paths...>
 ```
+
+## Agent skills
+
+`agents/skills/` holds skills for coding agents. They live outside `~/.config`, so link them by hand:
+
+```bash
+for skill in agents/skills/*/; do
+  name="$(basename "$skill")"
+  ln -sfn "$PWD/$skill" "$HOME/.claude/skills/$name"   # Claude Code
+  ln -sfn "$PWD/$skill" "$HOME/.agents/skills/$name"   # Codex
+done
+```
+
+- `pr-media`: before/after screenshots at mobile, tablet and desktop sizes, plus recordings, combined into labelled side-by-side images and uploaded privately to a pull request body. Needs Node, Playwright with Chromium, `gh`, and optionally `ffmpeg`.
