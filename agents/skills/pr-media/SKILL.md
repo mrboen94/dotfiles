@@ -29,7 +29,7 @@ Requirements: Node 18+, Playwright (in the project, globally, or via `PLAYWRIGHT
    - a default function reaches the state to capture (open a dialog, fill a form), or drives the flow while recording.
 
    Wait on content and test IDs, not fixed timeouts. Prefer mock or seeded local data over real accounts, and never capture personal data or secrets.
-3. **Before**: `capture --name <slug> --state before --url <url> --steps steps.mjs --title "…"`. For behavior changes, also run `record --state before --steps flow.mjs`.
+3. **Before**: `capture --name <slug> --state before --url <url> --steps steps.mjs --title "…"`. When a user flow changes or still images can't show the change, also run `record --name <slug> --state before --url <url> --steps flow.mjs` with the same slug and URL.
 4. **Implement and verify** the change.
 5. **After**: capture the same slugs, sizes and states with `--state after`, and repeat recordings with the same steps. New views use `--state after` only. Unfixed bugs use `--state bug --note "what is wrong, how to reproduce"`.
 6. **Combine**: run `compare --name <slug> [--note "…"]` for each slug. Open every composite and check that it shows the right state, that before and after show the same place, that nothing is cut off, and that it contains no personal data. Measure suspected bugs before reporting them.
