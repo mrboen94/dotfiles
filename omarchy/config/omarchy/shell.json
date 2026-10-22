@@ -1,0 +1,104 @@
+{
+  "bar": {
+    "centerAnchor": "omarchy.clock",
+    "layout": {
+      "center": [
+        {
+          "id": "omarchy.indicators"
+        },
+        {
+          "id": "omarchy.clock",
+          "format": "ddd d MMM HH:mm",
+          "formatAlt": "d MMMM 'W'ww yyyy",
+          "verticalFormat": "HH\n—\nmm"
+        },
+        {
+          "id": "omarchy.keyboard-layout"
+        },
+        {
+          "id": "omarchy.weather"
+        },
+        {
+          "id": "omarchy.system-update"
+        }
+      ],
+      "left": [
+        {
+          "id": "omarchy.menu"
+        },
+        {
+          "id": "omarchy.workspaces"
+        }
+      ],
+      "right": [
+        {
+          "id": "omarchy.tray",
+          "pinned": [
+            "Slack_status_icon_1",
+            "TelegramDesktop"
+          ],
+          "hidden": []
+        },
+        {
+          "id": "omarchy.tailscale"
+        },
+        {
+          "id": "io.github.jeremylanger.omaspotify",
+          "deviceName": "OmaSpotify",
+          "idleShutdownMinutes": 15,
+          "showMiniPlayer": "On",
+          "showVinylRecord": "On",
+          "shortcutPlayer": "Omarchy Music app",
+          "shortcutHints": "On",
+          "showLyrics": "On",
+          "showArtwork": "On",
+          "showTrackTitle": "On",
+          "showArtistName": "Off",
+          "showPausedTrack": "On",
+          "scrollBarText": "Off",
+          "scrollSpeed": "1",
+          "maxBarTextWidth": "240",
+          "fixedBarWidth": "Off",
+          "audioQuality": "320 kbps",
+          "normalizeVolume": "On",
+          "volumeLevel": "Normal",
+          "clientId": "",
+          "librarySort": "library",
+          "libraryView": "list",
+          "libraryFilter": "all"
+        },
+        {
+          "id": "robzolkos.github",
+          "repositoryScope": "Owned and organizations"
+        },
+        {
+          "id": "omarchy.agents"
+        },
+        {
+          "id": "omarchy.bluetooth"
+        },
+        {
+          "id": "omarchy.network"
+        },
+        {
+          "id": "omarchy.audio"
+        },
+        {
+          "id": "omarchy.monitor"
+        },
+        {
+          "id": "omarchy.power",
+          "showPercentage": false
+        }
+      ]
+    },
+    "position": "top",
+    "transparent": false
+  },
+  "idle": {
+    "lock": 300,
+    "screensaver": 150
+  },
+  "plugins": [],
+  "version": 1
+}

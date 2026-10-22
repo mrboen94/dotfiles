@@ -68,3 +68,12 @@ build/
 secrets.yaml
 config.local.*
 
+
+# kvern builds (kvern.cmd runs the Windows one)
+!tools/kvern/*.exe
+!omarchy/local/bin/
+
+# Emacs runtime caches
+emacs/eln-cache/
+emacs/elpa/
+emacs/tramp

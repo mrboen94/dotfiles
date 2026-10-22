@@ -1,0 +1,50 @@
+#!/bin/bash
+# Reposition the external monitor relative to the laptop's built-in display.
+# Usage: hypr-monitor-position <up|down|left|right>
+set -euo pipefail
+
+direction="${1:?usage: hypr-monitor-position <up|down|left|right>}"
+
+laptop=$(omarchy hyprland monitor laptop)
+monitors_json=$(hyprctl monitors -j)
+
+external=$(jq -r --arg laptop "$laptop" '[.[] | select(.name != $laptop)][0].name // empty' <<<"$monitors_json")
+
+if [[ -z "$external" ]]; then
+  omarchy osd -i display -m "No external monitor connected" || true
+  exit 0
+fi
+
+read -r lx ly lw lh lscale lrate < <(jq -r --arg n "$laptop" '.[] | select(.name==$n) | "\(.x) \(.y) \(.width) \(.height) \(.scale) \(.refreshRate)"' <<<"$monitors_json")
+read -r ew eh escale erate < <(jq -r --arg n "$external" '.[] | select(.name==$n) | "\(.width) \(.height) \(.scale) \(.refreshRate)"' <<<"$monitors_json")
+
+laptop_w=$(awk -v w="$lw" -v s="$lscale" 'BEGIN{printf "%.0f", w/s}')
+laptop_h=$(awk -v h="$lh" -v s="$lscale" 'BEGIN{printf "%.0f", h/s}')
+ext_w=$(awk -v w="$ew" -v s="$escale" 'BEGIN{printf "%.0f", w/s}')
+ext_h=$(awk -v h="$eh" -v s="$escale" 'BEGIN{printf "%.0f", h/s}')
+
+case "$direction" in
+  right) nx=$((lx + laptop_w)); ny=$ly ;;
+  left)  nx=$((lx - ext_w));    ny=$ly ;;
+  up)    nx=$lx;                ny=$((ly - ext_h)) ;;
+  down)  nx=$lx;                ny=$((ly + laptop_h)) ;;
+  *) echo "usage: hypr-monitor-position <up|down|left|right>" >&2; exit 1 ;;
+esac
+
+lrate_int=$(awk -v r="$lrate" 'BEGIN{printf "%.0f", r}')
+erate_int=$(awk -v r="$erate" 'BEGIN{printf "%.0f", r}')
+
+# Pin both monitors explicitly in one eval call, otherwise the laptop's
+# "auto" position rule (see monitors.lua) reshuffles it after the move.
+hyprctl eval "
+hl.monitor({ output = \"${laptop}\", mode = \"${lw}x${lh}@${lrate_int}\", position = \"${lx}x${ly}\", scale = ${lscale} })
+hl.monitor({ output = \"${external}\", mode = \"${ew}x${eh}@${erate_int}\", position = \"${nx}x${ny}\", scale = ${escale} })
+"
+
+# Persist as the new default so it survives reload/reboot/dock replug.
+monitors_lua="$HOME/.config/hypr/monitors.lua"
+if [[ -f "$monitors_lua" ]]; then
+  sed -E -i "s/position = \"auto-[a-z]+\"/position = \"auto-${direction}\"/" "$monitors_lua"
+fi
+
+omarchy osd -i display -m "Monitor moved: ${direction}" || true
